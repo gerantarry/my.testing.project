@@ -2,8 +2,8 @@ package scenarios;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class WebDriverScenario {
-//Стоит ли сделать WebdriverSteps с шагами установки драйвера?
+public class WebDriverSteps {
+
     //init
     {
         setupChromeDriver();
