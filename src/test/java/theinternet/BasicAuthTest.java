@@ -1,7 +1,8 @@
 package theinternet;
 
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,12 +10,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import scenarios.WebDriverSteps;
 import utils.FileUtils;
 
-import java.time.Duration;
 import java.util.Properties;
 
 public class BasicAuthTest extends WebDriverSteps {
     private WebDriver driver;
     private static String url;
+    private String excpectedResult = "Congratulations! You must have the proper credentials.";
+
 
     @BeforeAll
     public static void preSetUp(){
@@ -40,9 +42,12 @@ public class BasicAuthTest extends WebDriverSteps {
 
     @Test
     public void successAuthTest() {
-        driver.get(url);
-        //TODO понять как рабоать с эти всплывающим окном. Алерт ли это или нет?
-        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(3))
-                .until(ExpectedConditions.alertIsPresent());
+        String login = "admin", password = "admin";
+        String secrets = login + ":" + password;
+        String uri = url.substring(7);
+        driver.get("http://"+secrets+"@"+uri);
+
+       String actualResult = driver.findElement(By.xpath("//*/div/div[@class = 'example']/p")).getText();
+       Assertions.assertEquals(excpectedResult, actualResult);
     }
 }
