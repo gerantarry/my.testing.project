@@ -38,6 +38,7 @@ public class BasicAuthTest extends WebDriverSteps {
     }
 
     @Test
+    @Disabled
     public void successAuthTest() {
         String login = "admin", password = "admin";
         String secrets = login + ":" + password;

@@ -2,6 +2,7 @@ package simple;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -27,6 +28,7 @@ public class GoogleTest extends WebDriverSteps {
     }
 
     @Test
+    @Disabled
     public void searchTest(){
         WebElement inputElement = driver.findElement(By.xpath("//input[@name='q']"));
         inputElement.sendKeys("Сбербанк");

@@ -44,6 +44,7 @@ public class AddDeleteTest extends WebDriverSteps {
     }
 
     @Test
+    @Disabled
     //При нажатии появляется кнопка, при нажатии появившейся кнопки она удаляется
     public void addRemoveOneClickTest(){
       driver.get(url);
@@ -58,6 +59,7 @@ public class AddDeleteTest extends WebDriverSteps {
     }
 
     @Test
+    @Disabled
     //При N нажатии появляются N элементов кнопок
     public void addRemoveFiveClickTest(){
         driver.get(url);
