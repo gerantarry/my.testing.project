@@ -1,7 +1,6 @@
 package toolsQa;
 
 import io.cucumber.java.After;
-import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -17,9 +16,9 @@ public class PracticeFormTest extends WebDriverSteps {
     private static String url;
     private WebDriver driver;
 
-    @BeforeAll
-    public static void beforeAll(){
-       final Properties urls = FileUtils.readPropertiesFile("src/test/resources/url.properties");
+    @Given("prepare urls")
+    public void prepareUrls() {
+        final Properties urls = FileUtils.readPropertiesFile("src/test/resources/url.properties");
         if (urls != null){
             url = urls.getProperty("reg_form_url");
         }else {
