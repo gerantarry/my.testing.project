@@ -1,7 +1,6 @@
 package toolsQa;
 
 import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -19,7 +18,7 @@ public class PracticeFormTest extends WebDriverSteps {
     private WebDriver driver;
 
     @BeforeAll
-    public static void before_all(){
+    public static void beforeAll(){
        final Properties urls = FileUtils.readPropertiesFile("src/test/resources/url.properties");
         if (urls != null){
             url = urls.getProperty("reg_form_url");
@@ -28,28 +27,25 @@ public class PracticeFormTest extends WebDriverSteps {
         }
     }
 
-    @Before
-    public void set_up(){
-        driver = new ChromeDriver();
-    }
-
     @After
-    public void tear_down(){
+    public void tearDown(){
         driver.quit();
     }
 
     @Given("Student is on the reg. form page")
-    public void student_is_on_the_reg_form_page() {
+    public void studentIsOnTheRegFormPage() {
+        driver = new ChromeDriver();
         driver.get(url);
     }
 
     @When("Student inputs his data into the form")
-    public void student_inputs_his_data_into_the_form() {
+    public void studentInputsHisDataIntoTheForm() {
         //TODO Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
+
     @Then("Submit goes correct")
-    public void submit_goes_correct() {
+    public void submitGoesCorrect() {
         //TODO Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
