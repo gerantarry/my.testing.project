@@ -34,6 +34,12 @@ public class PracticeFormPage {
     @FindBy(xpath = "label[text() = 'Music']")
     private WebElement music;
 
+    @FindBy(id = "subjectsInput")
+    private WebElement subject;
+
+    @FindBy(id = "currentAddress")
+    private WebElement currentAddress;
+
     @FindBy(id = "submit")
     private WebElement submit;
 
@@ -44,10 +50,26 @@ public class PracticeFormPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void enterForm(final String fName, final String lName){
+    /**
+     *
+     * @param number - only digits allowed
+     * @param gender for the radiobutton. Allowed values: Male, Female, Other. Use public constants of the class.
+     */
+    public void enterForm(final String fName, final String lName, final String number, final String gender){
         firstName.sendKeys(fName);
         lastName.sendKeys(lName);
+        userNumber.sendKeys(number);
+        setGender(gender);
         submit.submit();
+    }
+
+    /**
+     * Set subject to the Subject input
+     */
+    public void setSubjects(String ... subjects){
+        for (String sbj : subjects){
+            subject.sendKeys(sbj);
+        }
     }
 
     /**
