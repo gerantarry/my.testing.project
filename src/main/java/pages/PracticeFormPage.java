@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+//TODO Use yandex wrapper lib for WebElements
 public class PracticeFormPage {
-    //TODO дописать локаторы
     @FindBy(id = "firstName")
     private WebElement firstName;
     @FindBy(id = "lastName")
@@ -15,9 +15,9 @@ public class PracticeFormPage {
     @FindBy(id = "userEmail")
     private WebElement userEmail;
     //Gender
-    @FindBy(xpath = "label[text() = 'Male']")
+    @FindBy(xpath = "//label[text() = 'Male']")
     private WebElement male;
-    @FindBy(xpath = "label[text() = 'Female']")
+    @FindBy(xpath = "//label[text() = 'Female']")
     private WebElement female;
     @FindBy(id = "gender-radio-3")
     private WebElement otherGender;
@@ -31,7 +31,7 @@ public class PracticeFormPage {
     private WebElement sport;
     @FindBy(xpath = "//label[text() = 'Reading']")
     private WebElement reading;
-    @FindBy(xpath = "label[text() = 'Music']")
+    @FindBy(xpath = "//label[text() = 'Music']")
     private WebElement music;
 
     @FindBy(id = "subjectsInput")
@@ -46,7 +46,7 @@ public class PracticeFormPage {
     public final static String READING = "Reading", SPORT = "Sport", MUSIC = "Music";
     public final static String MALE = "Male", FEMALE = "Female", OTHER_GENDER = "Other";
 
-    PracticeFormPage(final WebDriver driver){
+    public PracticeFormPage(final WebDriver driver){
         PageFactory.initElements(driver, this);
     }
 

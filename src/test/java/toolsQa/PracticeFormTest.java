@@ -4,17 +4,21 @@ import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.PracticeFormPage;
 import scenarios.WebDriverSteps;
 import utils.FileUtils;
 
 import java.util.Properties;
 
+//TODO make more readable
 public class PracticeFormTest extends WebDriverSteps {
 
     private static String url;
     private WebDriver driver;
+    private PracticeFormPage formPage;
 
     @Given("prepare urls")
     public void prepareUrls() {
@@ -35,18 +39,20 @@ public class PracticeFormTest extends WebDriverSteps {
     public void studentIsOnTheRegFormPage() {
         driver = new ChromeDriver();
         driver.get(url);
+        formPage = new PracticeFormPage(driver);
     }
 
     @When("Student inputs his data into the form")
     public void studentInputsHisDataIntoTheForm() {
-        //TODO Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        formPage.enterForm("Steve", "Jenkins", "8847210572", PracticeFormPage.MALE);
+
     }
 
     @Then("Submit goes correct")
     public void submitGoesCorrect() {
-        //TODO Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        driver.findElement(By.xpath("//tbody/tr/td[text() = 'Steve Jenkins']"));
+        driver.findElement(By.xpath("//tbody/tr/td[text() = '8847210572']"));
+        driver.findElement(By.xpath("//tbody/tr/td[text() = 'Male']"));
     }
 
 }
