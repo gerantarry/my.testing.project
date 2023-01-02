@@ -20,11 +20,11 @@ public class PracticeFormTest extends WebDriverSteps {
     private WebDriver driver;
     private PracticeFormPage formPage;
 
-    @Given("prepare urls")
-    public void prepareUrls() {
-        final Properties urls = FileUtils.readPropertiesFile("src/test/resources/url.properties");
+    @Given("prepare urls {string}")
+    public void prepareUrls(String alias) {
+        final Properties urls = FileUtils.readPropertiesFile(FileUtils.URLS_FILE_PATH);
         if (urls != null){
-            url = urls.getProperty("reg_form_url");
+            url = urls.getProperty(alias);
         }else {
             throw new NullPointerException("urls == null");
         }
