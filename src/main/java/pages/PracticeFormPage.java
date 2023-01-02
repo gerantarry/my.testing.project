@@ -28,7 +28,7 @@ public class PracticeFormPage {
     private WebElement dateOfBirth;
     //Hobbies
     @FindBy(id = "hobbies-checkbox-1")
-    private WebElement sport;
+    private WebElement sports;
     @FindBy(xpath = "//label[text() = 'Reading']")
     private WebElement reading;
     @FindBy(xpath = "//label[text() = 'Music']")
@@ -43,7 +43,7 @@ public class PracticeFormPage {
     @FindBy(id = "submit")
     private WebElement submit;
 
-    public final static String READING = "Reading", SPORT = "Sport", MUSIC = "Music";
+    public final static String READING = "Reading", SPORTS = "Sports", MUSIC = "Music";
     public final static String MALE = "Male", FEMALE = "Female", OTHER_GENDER = "Other";
 
     public PracticeFormPage(final WebDriver driver){
@@ -99,13 +99,33 @@ public class PracticeFormPage {
             switch (hobbie){
                 case READING: reading.click();
                 break;
-                case SPORT: sport.click();
+                case SPORTS: sports.click();
                 break;
                 case MUSIC: music.click();
                 default:
                     throw  new IllegalArgumentException("parameter 'hobbie' has incorrect value: " + hobbie);
             }
         }
+    }
+
+    /**
+     * Check hobbies checkboxes
+     * Allowed values: Sport, Reading, Music. Use public constants of the class.
+     * @param hobbie for the checkboxes
+     */
+    public boolean checkHobbieSelection(String hobbie){
+        boolean isSelected;
+        switch (hobbie){
+            case READING: isSelected = reading.isSelected();
+                break;
+            case SPORTS: isSelected = sports.isSelected();
+                break;
+            case MUSIC: isSelected = music.isSelected();
+            break;
+            default:
+                throw  new IllegalArgumentException("parameter 'hobbie' has incorrect value: " + hobbie);
+        }
+        return isSelected;
     }
 
 

@@ -4,6 +4,7 @@ import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -55,4 +56,18 @@ public class PracticeFormTest extends WebDriverSteps {
         driver.findElement(By.xpath("//tbody/tr/td[text() = 'Male']"));
     }
 
+    @Given("Hobbies didn't select")
+    public void hobbiesDidntSelect() {
+        Assertions.assertAll(
+                () -> Assertions.assertFalse(formPage.checkHobbieSelection(PracticeFormPage.SPORTS)),
+                () -> Assertions.assertFalse(formPage.checkHobbieSelection(PracticeFormPage.READING)),
+                () -> Assertions.assertFalse(formPage.checkHobbieSelection(PracticeFormPage.MUSIC))
+        );
+    }
+
+    @When("Student picks a <hobbie>")
+    public void studentPicksAHobbie(String hobbie) {
+        formPage.setHobbies(hobbie);
+       Assertions.assertTrue(formPage.checkHobbieSelection(hobbie));
+    }
 }
