@@ -102,6 +102,7 @@ public class PracticeFormPage {
                 case SPORTS: sports.click();
                 break;
                 case MUSIC: music.click();
+                break;
                 default:
                     throw  new IllegalArgumentException("parameter 'hobbie' has incorrect value: " + hobbie);
             }

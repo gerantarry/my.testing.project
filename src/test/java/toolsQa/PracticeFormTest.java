@@ -17,18 +17,21 @@ import java.util.Properties;
 //TODO make more readable
 public class PracticeFormTest extends WebDriverSteps {
 
-    private static String url;
     private WebDriver driver;
     private PracticeFormPage formPage;
 
     @Given("prepare urls {string}")
     public void prepareUrls(String alias) {
         final Properties urls = FileUtils.readPropertiesFile(FileUtils.URLS_FILE_PATH);
+        String url;
         if (urls != null){
             url = urls.getProperty(alias);
         }else {
             throw new NullPointerException("urls == null");
         }
+        driver = new ChromeDriver();
+        driver.get(url);
+        formPage = new PracticeFormPage(driver);
     }
 
     @After
@@ -38,9 +41,7 @@ public class PracticeFormTest extends WebDriverSteps {
 
     @Given("Student is on the reg. form page")
     public void studentIsOnTheRegFormPage() {
-        driver = new ChromeDriver();
-        driver.get(url);
-        formPage = new PracticeFormPage(driver);
+        Assertions.assertNotNull(formPage);
     }
 
     @When("Student inputs his data into the form")
@@ -65,9 +66,35 @@ public class PracticeFormTest extends WebDriverSteps {
         );
     }
 
-    @When("Student picks a <hobbie>")
-    public void studentPicksAHobbie(String hobbie) {
-        formPage.setHobbies(hobbie);
-       Assertions.assertTrue(formPage.checkHobbieSelection(hobbie));
+    @When("Student picks a Sports")
+    public void studentPicksASports() {
+        formPage.setHobbies(PracticeFormPage.SPORTS);
     }
+
+    @Then("The Sports checkbox becomes selected")
+    public void theSportsCheckboxBecomesSelected() {
+        Assertions.assertTrue(formPage.checkHobbieSelection(PracticeFormPage.SPORTS));
+    }
+
+    @When("Student picks a Reading")
+    public void studentPicksAReading() {
+        formPage.setHobbies(PracticeFormPage.READING);
+    }
+
+    @Then("The Reading checkbox becomes selected")
+    public void theReadingCheckboxBecomesSelected() {
+        Assertions.assertTrue(formPage.checkHobbieSelection(PracticeFormPage.READING));
+    }
+
+    @When("Student picks a Music")
+    public void studentPicksAMusic() {
+        formPage.setHobbies(PracticeFormPage.MUSIC);
+    }
+
+    @Then("The Music checkbox becomes selected")
+    public void theMusicCheckboxBecomesSelected() {
+        Assertions.assertTrue(formPage.checkHobbieSelection(PracticeFormPage.MUSIC));
+    }
+
+
 }
