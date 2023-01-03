@@ -9,22 +9,24 @@ import java.util.Map;
 
 public class ArgumentStepDefinition {
 
+    public static List<Student> STUDENTS;
+
     @DataTableType
-    public Student studentDefinition(Map<String, String> entry){
+    public Student studentDefinition(Map<String, String> entry) {
         Student.Gender gender = defineGender(entry.get("gender").trim());
-       return new Student(
+        return new Student(
                 entry.get("firstName")
                         .trim(),
                 entry.get("secondName")
                         .trim(),
                 gender,
-               entry.get("phoneNumber")
-                       .trim()
+                entry.get("phoneNumber")
+                        .trim()
         );
     }
 
-    private Student.Gender defineGender(String g){
-        switch (g){
+    private Student.Gender defineGender(String g) {
+        switch (g) {
             case "Male":
                 return Student.Gender.MALE;
             case "Female":
@@ -34,11 +36,9 @@ public class ArgumentStepDefinition {
         }
     }
 
-
-
-    @And("He has")
+    @And("His information is")
     public void heHas(List<Student> students) {
-
+        STUDENTS = students;
     }
 
 }

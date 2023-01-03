@@ -1,5 +1,6 @@
 package toolsQa;
 
+import dto.Student;
 import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -46,15 +47,16 @@ public class PracticeFormTest extends WebDriverSteps {
 
     @When("Student inputs his data into the form")
     public void studentInputsHisDataIntoTheForm() {
-        formPage.enterForm("Steve", "Jenkins", "8847210572", PracticeFormPage.MALE);
-
+        Student steve = ArgumentStepDefinition.STUDENTS.get(0);
+        formPage.enterForm(steve.getFirstName(), steve.getSecondName(), steve.getPhoneNumber(), steve.getGender());
     }
 
     @Then("Submit goes correct")
     public void submitGoesCorrect() {
-        driver.findElement(By.xpath("//tbody/tr/td[text() = 'Steve Jenkins']"));
-        driver.findElement(By.xpath("//tbody/tr/td[text() = '8847210572']"));
-        driver.findElement(By.xpath("//tbody/tr/td[text() = 'Male']"));
+        Student steve = ArgumentStepDefinition.STUDENTS.get(0);
+        driver.findElement(By.xpath("//tbody/tr/td[text() = '"+steve.getFirstName()+" "+steve.getSecondName()+"']"));
+        driver.findElement(By.xpath("//tbody/tr/td[text() = '"+steve.getPhoneNumber()+"']"));
+        driver.findElement(By.xpath("//tbody/tr/td[text() = '"+steve.getGender()+"']"));
     }
 
     @Given("Hobbies didn't select")
@@ -95,6 +97,4 @@ public class PracticeFormTest extends WebDriverSteps {
     public void theMusicCheckboxBecomesSelected() {
         Assertions.assertTrue(formPage.checkHobbieSelection(PracticeFormPage.MUSIC));
     }
-
-
 }
