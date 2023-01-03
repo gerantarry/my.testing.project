@@ -16,6 +16,13 @@ public class Student {
         Gender(String gender){
             this.gender = gender;
         }
+}
+
+    public Student(String fName, String sName, Gender gender, String pNumber){
+        firstName = fName;
+        secondName = sName;
+        setGender(gender);
+        phoneNumber = pNumber;
     }
 
     @Getter
@@ -23,6 +30,7 @@ public class Student {
     private String firstName, secondName;
 
     @Getter
+    @Setter
     private String phoneNumber;
 
     //Allowed values from enum

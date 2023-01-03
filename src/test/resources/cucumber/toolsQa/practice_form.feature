@@ -8,10 +8,8 @@ Feature: Student Registration Form
   Scenario: Correct and full input to the form
     Given Student is on the reg. form page
     And He has
-      | firstName   | Steve      |
-      | secondName  | Jenkins    |
-      | gender      | Male       |
-      | phoneNumber | 8847210572 |
+      | firstName | secondName | gender | phoneNumber |
+      | Steve     | Jenkins    | Male   | 8847210572  |
     When Student inputs his data into the form
     Then Submit goes correct
 
