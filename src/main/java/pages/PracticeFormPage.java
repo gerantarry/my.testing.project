@@ -3,6 +3,7 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -29,9 +30,9 @@ public class PracticeFormPage {
     //Hobbies
     @FindBy(id = "hobbies-checkbox-1")
     private WebElement sports;
-    @FindBy(xpath = "//label[text() = 'Reading']")
+    @FindBy(id = "hobbies-checkbox-2")
     private WebElement reading;
-    @FindBy(xpath = "//label[text() = 'Music']")
+    @FindBy(id = "hobbies-checkbox-3")
     private WebElement music;
 
     @FindBy(id = "subjectsInput")
@@ -43,10 +44,13 @@ public class PracticeFormPage {
     @FindBy(id = "submit")
     private WebElement submit;
 
+    private final WebDriver driver;
+
     public final static String READING = "Reading", SPORTS = "Sports", MUSIC = "Music";
     public final static String MALE = "Male", FEMALE = "Female", OTHER_GENDER = "Other";
 
     public PracticeFormPage(final WebDriver driver){
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
@@ -97,16 +101,21 @@ public class PracticeFormPage {
     public void setHobbies(String ... hobbies){
         for (String hobbie : hobbies){
             switch (hobbie){
-                case READING: reading.click();
+                case READING: clickCheckBoxByAction(reading);
                 break;
-                case SPORTS: sports.click();
+                case SPORTS: clickCheckBoxByAction(sports);
                 break;
-                case MUSIC: music.click();
+                case MUSIC: clickCheckBoxByAction(music);
                 break;
                 default:
                     throw  new IllegalArgumentException("parameter 'hobbie' has incorrect value: " + hobbie);
             }
         }
+    }
+
+    private void clickCheckBoxByAction(WebElement webElement){
+        Actions action = new Actions(driver);
+        action.moveToElement(webElement).click().build().perform();
     }
 
     /**
