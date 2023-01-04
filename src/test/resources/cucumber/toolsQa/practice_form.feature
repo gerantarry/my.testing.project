@@ -23,3 +23,14 @@ Feature: Student Registration Form
       | Sports  |
       | Reading |
       | Music   |
+
+    Scenario Outline: Gender selection. Need to check the group of radio buttons.
+      Given Gender didnt selected
+      When Student pick a <gender>
+      Then The <gender> radio becomes selected
+
+      Examples:
+        | gender  |
+        | Male    |
+        | Female  |
+        | Dolphin |
