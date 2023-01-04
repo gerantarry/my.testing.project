@@ -6,21 +6,24 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import ru.yandex.qatools.htmlelements.element.TextInput;
+import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
+import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
 
 //TODO Use yandex wrapper lib for WebElements
 public class PracticeFormPage {
     @FindBy(id = "firstName")
-    private WebElement firstName;
+    private TextInput firstName;
     @FindBy(id = "lastName")
-    private WebElement lastName;
+    private TextInput lastName;
     @FindBy(id = "userEmail")
-    private WebElement userEmail;
+    private TextInput userEmail;
     //Gender
     @FindBy(xpath = "//label[text() = 'Male']")
     private WebElement male;
     @FindBy(xpath = "//label[text() = 'Female']")
     private WebElement female;
-    @FindBy(id = "gender-radio-3")
+    @FindBy(xpath = "//label[text() = 'Other']")
     private WebElement otherGender;
 
     @FindBy(id = "userNumber")
@@ -51,7 +54,7 @@ public class PracticeFormPage {
 
     public PracticeFormPage(final WebDriver driver){
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(new HtmlElementDecorator(new HtmlElementLocatorFactory(driver)), this);
     }
 
     /**
@@ -87,9 +90,8 @@ public class PracticeFormPage {
             break;
             case FEMALE: female.click();
             break;
-            case OTHER_GENDER: otherGender.click();
             default:
-                throw new IllegalArgumentException("parameter 'gender' has incorrect value: " + gender);
+                otherGender.click();
         }
     }
 
@@ -138,6 +140,24 @@ public class PracticeFormPage {
         return isSelected;
     }
 
+    /**
+     * Check selection of the gender radion buttons group
+     * @return indicator
+     */
+    public boolean checkGenderSelection(){
+        return male.isSelected()
+                || female.isSelected()
+                || otherGender.isSelected();
+    }
 
-
+    public WebElement getSelectedGender(String gender){
+        switch (gender){
+            case MALE:
+                return male;
+            case FEMALE:
+                return female;
+            default:
+                return otherGender;
+        }
+    }
 }

@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.PracticeFormPage;
 import scenarios.WebDriverSteps;
@@ -96,5 +97,44 @@ public class PracticeFormTest extends WebDriverSteps {
     @Then("The Music checkbox becomes selected")
     public void theMusicCheckboxBecomesSelected() {
         Assertions.assertTrue(formPage.checkHobbieSelection(PracticeFormPage.MUSIC));
+    }
+
+    @Given("Gender didn't selected")
+    public void genderDidntSelected() {
+        Assertions.assertFalse(formPage.checkGenderSelection());
+    }
+
+    @When("Student picks a Male")
+    public void studentPickAMale() {
+        formPage.setGender(PracticeFormPage.MALE);
+    }
+
+    @Then("The Male radio becomes selected")
+    public void theMaleRadioBecomesSelected() {
+       WebElement selected = formPage.getSelectedGender(PracticeFormPage.MALE);
+      Assertions.assertTrue(selected.isSelected());
+    }
+
+    @When("Student picks a Female")
+    public void studentPickAFemale() {
+        formPage.setGender(PracticeFormPage.FEMALE);
+    }
+
+    @Then("The Female radio becomes selected")
+    public void theFemaleRadioBecomesSelected() {
+        WebElement selected = formPage.getSelectedGender(PracticeFormPage.FEMALE);
+        Assertions.assertTrue(selected.isSelected());
+    }
+
+
+    @When("Student picks a Dolphin")
+    public void studentPickADolphin() {
+        formPage.setGender(PracticeFormPage.OTHER_GENDER);
+    }
+
+    @Then("The Dolphin radio becomes selected")
+    public void theDolphinRadioBecomesSelected() {
+        WebElement selected = formPage.getSelectedGender(PracticeFormPage.OTHER_GENDER);
+        Assertions.assertTrue(selected.isSelected());
     }
 }

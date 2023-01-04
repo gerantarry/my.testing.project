@@ -24,9 +24,9 @@ Feature: Student Registration Form
       | Reading |
       | Music   |
 
-    Scenario Outline: Gender selection. Need to check the group of radio buttons.
-      Given Gender didnt selected
-      When Student pick a <gender>
+    Scenario Template: Gender selection. Need to check the group of radio buttons.
+      Given Gender didn't selected
+      When Student picks a <gender>
       Then The <gender> radio becomes selected
 
       Examples:
