@@ -19,12 +19,19 @@
 
     <dependencies>
 
-        <!--Selenium для тестирования UI -->
+        <!-- WebElement Wrapper -->
+        <dependency>
+            <groupId>ru.yandex.qatools.htmlelements</groupId>
+            <artifactId>htmlelements-all</artifactId>
+            <version>1.20.0</version>
+        </dependency>
+
+        <!--Selenium для тестирования UI
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.7.1</version>
-        </dependency>
+        </dependency> -->
 
         <!--WebDriverManager для автоматического поиска веб драйвера любого браузера  -->
         <dependency>
