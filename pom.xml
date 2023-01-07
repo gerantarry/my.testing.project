@@ -57,6 +57,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!--Движок Junit5 для запуска тестов cucumber -->
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
@@ -64,6 +65,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!--Библиотека для связки Junit c Cucumber -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
