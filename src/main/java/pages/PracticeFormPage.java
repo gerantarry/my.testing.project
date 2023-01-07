@@ -1,6 +1,7 @@
 package pages;
 
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -19,11 +20,11 @@ public class PracticeFormPage {
     @FindBy(id = "userEmail")
     private TextInput userEmail;
     //Gender
-    @FindBy(xpath = "//label[text() = 'Male']")
+    @FindBy(xpath = "//input[@type = 'radio' and @value = 'Male']")
     private WebElement male;
-    @FindBy(xpath = "//label[text() = 'Female']")
+    @FindBy(xpath = "//input[@type = 'radio' and @value = 'Female']")
     private WebElement female;
-    @FindBy(xpath = "//label[text() = 'Other']")
+    @FindBy(xpath = "//input[@type = 'radio' and @value = 'Other']")
     private WebElement otherGender;
 
     @FindBy(id = "userNumber")
@@ -86,13 +87,24 @@ public class PracticeFormPage {
      */
     public void setGender(String gender){
         switch (gender){
-            case MALE: male.click();
+            case MALE: jsRadioButtonClick(male);
             break;
-            case FEMALE: female.click();
+            case FEMALE: jsRadioButtonClick(female);
             break;
             default:
-                otherGender.click();
+                jsRadioButtonClick(otherGender);
         }
+    }
+
+    /**
+     * This method needs for correct click.
+     * There is an article where you can find explanation of this case.
+     * <a href="https://goo.su/D64Ij"> click here</a>
+     * @param radio button for clicking
+     */
+    private void jsRadioButtonClick(WebElement radio) {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("arguments[0].click()", radio);
     }
 
     /**
