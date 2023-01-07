@@ -22,7 +22,7 @@ public class PracticeFormTest extends WebDriverSteps {
     private WebDriver driver;
     private PracticeFormPage formPage;
 
-    @Given("prepare urls {string}")
+    @Given("Prepare urls {string}")
     public void prepareUrls(String alias) {
         final Properties urls = FileUtils.readPropertiesFile(FileUtils.URLS_FILE_PATH);
         String url;

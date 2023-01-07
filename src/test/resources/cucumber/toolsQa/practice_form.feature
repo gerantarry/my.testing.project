@@ -3,7 +3,7 @@ Feature: Student Registration Form
 
   #Обозначение общего шага для всех сценариев в фиче
   Background:
-    Given prepare urls "reg_form_url"
+    Given Prepare urls "reg_form_url"
 
   Scenario: Correct and full input to the form
     Given Student is on the reg. form page
