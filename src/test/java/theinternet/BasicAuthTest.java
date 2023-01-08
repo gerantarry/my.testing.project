@@ -12,12 +12,11 @@ import java.util.Properties;
 public class BasicAuthTest extends WebDriverSteps {
     private WebDriver driver;
     private static String url;
-    private String excpectedResult = "Congratulations! You must have the proper credentials.";
 
 
     @BeforeAll
     public static void preSetUp(){
-        Properties prop = FileUtils.readPropertiesFile("src/test/resources/url.properties");
+        Properties prop = FileUtils.readPropertiesFile(FileUtils.URLS_FILE_PATH);
         if (prop!=null){
             url = prop.getProperty("basic_auth_url");
         }else{
@@ -46,6 +45,7 @@ public class BasicAuthTest extends WebDriverSteps {
         driver.get("http://"+secrets+"@"+uri);
 
        String actualResult = driver.findElement(By.xpath("//*/div/div[@class = 'example']/p")).getText();
+       String excpectedResult = "Congratulations! You must have the proper credentials.";
        Assertions.assertEquals(excpectedResult, actualResult);
     }
 }
