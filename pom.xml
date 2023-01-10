@@ -13,8 +13,9 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <!--versions -->
-        <junit-jupiter-engine.version>5.9.0</junit-jupiter-engine.version>
+        <junit-jupiter-engine.version>5.9.1</junit-jupiter-engine.version>
         <cucumber.version>7.10.1</cucumber.version>
+        <aspectj.version>1.8.10</aspectj.version>
     </properties>
 
     <dependencies>
@@ -41,6 +42,7 @@
             <scope>compile</scope>
         </dependency>
 
+        <!--Matchers для Assertoв -->
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
@@ -48,6 +50,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!--Аллюр для JUnit5-->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>2.20.1</version>
+            <scope>test</scope>
+        </dependency>
 
         <!--Junit - движок для тестов -->
         <dependency>
@@ -95,42 +104,84 @@
         <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
 
         <pluginManagement>
+
             <plugins>
+
                 <plugin>
                 <!--Для управления запуском тестов -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.0</version>
-                <configuration>
-                    <properties>
-                        <configurationParameters>
-                            cucumber.junit-platform.naming-strategy=long
-                        </configurationParameters>
-                    </properties>
-                </configuration>
+
+                    <configuration>
+                        <testFailureIgnore>false</testFailureIgnore>
+                        <argLine>
+                            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        </argLine>
+                        <systemProperties>
+                            <property>
+                                <name>junit.jupiter.extensions.autodetection.enabled</name>
+                                <value>true</value>
+                            </property>
+                        </systemProperties>
+                        <properties>
+                            <configurationParameters>
+                                cucumber.junit-platform.naming-strategy=long
+                            </configurationParameters>
+                        </properties>
+                    </configuration>
+
+                    <dependencies>
+                        <!--Чтобы Junit работал с плагином -->
+                        <dependency>
+                            <groupId>org.junit.platform</groupId>
+                            <artifactId>junit-platform-surefire-provider</artifactId>
+                            <version>1.2.0</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.junit.jupiter</groupId>
+                            <artifactId>junit-jupiter-engine</artifactId>
+                            <version>${junit-jupiter-engine.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjweaver</artifactId>
+                            <version>${aspectj.version}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
+
+                <plugin>
+                    <groupId>io.qameta.allure</groupId>
+                    <artifactId>allure-maven</artifactId>
+                    <version>2.12.0</version>
+                    <configuration>
+                        <allureDownloadUrl>
+                            https://github.com/allure-framework/allure2/releases/download/2.7.0/allure-2.7.0.zip
+                        </allureDownloadUrl>
+                        <!-- Allure >= 2.8.0: download from Maven Central -->
+                        <!-- <allureDownloadUrl>http://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/%s/allure-commandline-%s.zip</allureDownloadUrl> -->
+                        <!-- Custom URL -->
+                        <!-- <allureDownloadUrl>https://example.com/allure/allure-2.0.1.zip</allureDownloadUrl> -->
+                        <reportVersion>2.7.0</reportVersion>
+                        <reportDirectory>allure-report</reportDirectory>
+                        <resultsDirectory>surefire-reports</resultsDirectory>
+                    </configuration>
+                </plugin>
+
             </plugins>
         </pluginManagement>
 
         <plugins>
+            <!--Для управления запуском тестов -->
             <plugin>
-                <!--Для управления запуском тестов -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-
-                <dependencies>
-                    <!--Чтобы Junit работал с плагином -->
-                    <dependency>
-                        <groupId>org.junit.platform</groupId>
-                        <artifactId>junit-platform-surefire-provider</artifactId>
-                        <version>1.2.0</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.junit.jupiter</groupId>
-                        <artifactId>junit-jupiter-engine</artifactId>
-                        <version>${junit-jupiter-engine.version}</version>
-                    </dependency>
-                </dependencies>
+            </plugin>
+            <!--Для генерации отчёта на фазе test -->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
             </plugin>
         </plugins>
     </build>
