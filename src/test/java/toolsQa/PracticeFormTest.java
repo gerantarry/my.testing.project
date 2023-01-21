@@ -69,34 +69,14 @@ public class PracticeFormTest extends WebDriverSteps {
         );
     }
 
-    @When("Student picks a Sports")
-    public void studentPicksASports() {
-        formPage.setHobbies(PracticeFormPage.SPORTS);
+    @When("Student picks a {word}")
+    public void studentPicksAHobbie(String word) {
+        formPage.setHobbies(word);
     }
 
-    @Then("The Sports checkbox becomes selected")
-    public void theSportsCheckboxBecomesSelected() {
-        Assertions.assertTrue(formPage.checkHobbieSelection(PracticeFormPage.SPORTS));
-    }
-
-    @When("Student picks a Reading")
-    public void studentPicksAReading() {
-        formPage.setHobbies(PracticeFormPage.READING);
-    }
-
-    @Then("The Reading checkbox becomes selected")
-    public void theReadingCheckboxBecomesSelected() {
-        Assertions.assertTrue(formPage.checkHobbieSelection(PracticeFormPage.READING));
-    }
-
-    @When("Student picks a Music")
-    public void studentPicksAMusic() {
-        formPage.setHobbies(PracticeFormPage.MUSIC);
-    }
-
-    @Then("The Music checkbox becomes selected")
-    public void theMusicCheckboxBecomesSelected() {
-        Assertions.assertTrue(formPage.checkHobbieSelection(PracticeFormPage.MUSIC));
+    @Then("The {word} checkbox becomes selected")
+    public void theHobbieCheckboxBecomesSelected(String word) {
+        Assertions.assertTrue(formPage.checkHobbieSelection(word));
     }
 
     @Given("Gender didn't selected")
@@ -104,37 +84,14 @@ public class PracticeFormTest extends WebDriverSteps {
         Assertions.assertFalse(formPage.checkGenderSelection());
     }
 
-    @When("Student picks a Male")
-    public void studentPickAMale() {
-        formPage.setGender(PracticeFormPage.MALE);
+    @When("Student picks a gender {word}")
+    public void studentPickAGender(String word) {
+        formPage.setGender(word);
     }
 
-    @Then("The Male radio becomes selected")
-    public void theMaleRadioBecomesSelected() {
-       WebElement selected = formPage.getSelectedGender(PracticeFormPage.MALE);
+    @Then("The {word} radio becomes selected")
+    public void theGenderRadioBecomesSelected(String word) {
+       WebElement selected = formPage.getSelectedGender(word);
       Assertions.assertTrue(selected.isSelected());
-    }
-
-    @When("Student picks a Female")
-    public void studentPickAFemale() {
-        formPage.setGender(PracticeFormPage.FEMALE);
-    }
-
-    @Then("The Female radio becomes selected")
-    public void theFemaleRadioBecomesSelected() {
-        WebElement selected = formPage.getSelectedGender(PracticeFormPage.FEMALE);
-        Assertions.assertTrue(selected.isSelected());
-    }
-
-
-    @When("Student picks a Dolphin")
-    public void studentPickADolphin() {
-        formPage.setGender(PracticeFormPage.OTHER_GENDER);
-    }
-
-    @Then("The Dolphin radio becomes selected")
-    public void theDolphinRadioBecomesSelected() {
-        WebElement selected = formPage.getSelectedGender(PracticeFormPage.OTHER_GENDER);
-        Assertions.assertTrue(selected.isSelected());
     }
 }

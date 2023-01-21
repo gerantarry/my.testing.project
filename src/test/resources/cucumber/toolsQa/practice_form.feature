@@ -26,7 +26,7 @@ Feature: Student Registration Form
 
     Scenario Template: Gender selection. Need to check the group of radio buttons.
       Given Gender didn't selected
-      When Student picks a <gender>
+      When Student picks a gender <gender>
       Then The <gender> radio becomes selected
 
       Examples:
