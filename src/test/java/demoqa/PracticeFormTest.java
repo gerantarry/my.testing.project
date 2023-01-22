@@ -38,7 +38,9 @@ public class PracticeFormTest extends WebDriverSteps {
 
     @After
     public void tearDown(){
-        driver.quit();
+        if (driver != null){
+            driver.quit();
+        }
     }
 
     @Given("Student is on the reg. form page")
