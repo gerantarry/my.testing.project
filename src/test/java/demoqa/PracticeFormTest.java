@@ -1,6 +1,6 @@
-package toolsQa;
+package demoqa;
 
-import dto.Student;
+import entity.Student;
 import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

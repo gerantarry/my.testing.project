@@ -1,6 +1,6 @@
-package toolsQa;
+package demoqa;
 
-import dto.Student;
+import entity.Student;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.And;
 
