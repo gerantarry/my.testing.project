@@ -28,13 +28,6 @@
             <version>1.20.0</version>
         </dependency>
 
-        <!--Selenium для тестирования UI
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>4.7.1</version>
-        </dependency> -->
-
         <!--WebDriverManager для автоматического поиска веб драйвера любого браузера  -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
@@ -101,9 +94,6 @@
     <build>
         <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
         <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
-
-        <pluginManagement>
-
             <plugins>
 
                 <plugin>
@@ -111,7 +101,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.0</version>
-
                     <configuration>
                         <testFailureIgnore>false</testFailureIgnore>
                         <argLine>
@@ -123,6 +112,10 @@
                                 <name>junit.jupiter.extensions.autodetection.enabled</name>
                                 <value>true</value>
                             </property>
+                            <property>
+                                <name>allure.results.directory</name>
+                                <value>${project.build.directory}/allure-results</value>
+                            </property>
                         </systemProperties>
                         <properties>
                             <configurationParameters>
@@ -130,7 +123,6 @@
                             </configurationParameters>
                         </properties>
                     </configuration>
-
                     <dependencies>
                         <!--Чтобы Junit работал с плагином -->
                         <dependency>
@@ -150,7 +142,7 @@
                         </dependency>
                     </dependencies>
                 </plugin>
-
+                <!--Для генерации отчёта на фазе test -->
                 <plugin>
                     <groupId>io.qameta.allure</groupId>
                     <artifactId>allure-maven</artifactId>
@@ -159,31 +151,10 @@
                         <allureDownloadUrl>
                             https://github.com/allure-framework/allure2/releases/download/2.7.0/allure-2.7.0.zip
                         </allureDownloadUrl>
-                        <!-- Allure >= 2.8.0: download from Maven Central -->
-                        <!-- <allureDownloadUrl>http://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/%s/allure-commandline-%s.zip</allureDownloadUrl> -->
-                        <!-- Custom URL -->
-                        <!-- <allureDownloadUrl>https://example.com/allure/allure-2.0.1.zip</allureDownloadUrl> -->
                         <reportVersion>2.7.0</reportVersion>
-                        <reportDirectory>allure-report</reportDirectory>
-                        <resultsDirectory>surefire-reports</resultsDirectory>
                     </configuration>
                 </plugin>
-
             </plugins>
-        </pluginManagement>
-
-        <plugins>
-            <!--Для управления запуском тестов -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-            </plugin>
-            <!--Для генерации отчёта на фазе test -->
-            <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-            </plugin>
-        </plugins>
     </build>
 
 </project>
