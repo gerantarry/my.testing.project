@@ -6,7 +6,7 @@ import io.restassured.response.Response;
 
 /**
  * This is a httpManager object for
- * <a href="http://restful-booker.herokuapp.com/apidoc/index.html#api-Auth">...</a>
+ * <a href="http://restful-booker.herokuapp.com/apidoc/index.html#api-Auth">RestfulBooker API</a>
  */
 public class HttpManager
         extends BaseHttpManager

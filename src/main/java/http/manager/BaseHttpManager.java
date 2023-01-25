@@ -30,6 +30,10 @@ public class BaseHttpManager extends AbstractHttpManager {
                 .build();
     }
 
+    public void setContentType(String contentType){
+        this.rqSpec.contentType(contentType);
+    }
+
     /**
      * some params will be overwritten
      * @param spec for merging
