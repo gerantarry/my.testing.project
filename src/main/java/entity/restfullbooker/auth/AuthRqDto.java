@@ -1,4 +1,4 @@
-package entity.restfullbooker;
+package entity.restfullbooker.auth;
 
 import lombok.Data;
 
