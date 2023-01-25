@@ -1,20 +1,16 @@
 package restfullbooker;
 
 import entity.restfullbooker.AuthRqDto;
-import http.manager.v1.HttpManager;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.response.Response;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Assertions;
 
 import static org.hamcrest.Matchers.is;
 
-public class AuthStepDefinition {
-    private final HttpManager httpManager = new HttpManager();
-    private Response response;
+public class AuthStepDefinition extends AbstractBaseStepDefinition{
     private String requestBody;
 
     @Given("request body")

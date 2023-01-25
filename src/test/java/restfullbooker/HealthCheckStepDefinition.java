@@ -1,14 +1,10 @@
 package restfullbooker;
 
-import http.manager.v1.HttpManager;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 
-public class HealthCheckStepDefinition {
-    private final HttpManager httpManager = new HttpManager();
-    private Response response;
+public class HealthCheckStepDefinition extends AbstractBaseStepDefinition {
 
     @When("do GET request to {string}")
     public void do_get_request_to(String string) {
