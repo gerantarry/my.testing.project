@@ -16,7 +16,6 @@ import utils.FileUtils;
 
 import java.util.Properties;
 
-//TODO make more readable
 public class PracticeFormTest extends WebDriverSteps {
 
     private WebDriver driver;
@@ -36,7 +35,7 @@ public class PracticeFormTest extends WebDriverSteps {
         formPage = new PracticeFormPage(driver);
     }
 
-    @After
+    @After(value = "@UI")
     public void tearDown(){
         if (driver != null){
             driver.quit();

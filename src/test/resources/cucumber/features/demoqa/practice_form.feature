@@ -5,6 +5,7 @@ Feature: Student Registration Form
   Background:
     Given Prepare urls "reg_form_url"
 
+  @UI
   Scenario: Correct and full input to the form
     Given Student is on the reg. form page
     And His information is
@@ -13,6 +14,7 @@ Feature: Student Registration Form
     When Student inputs his data into the form
     Then Submit goes correct
 
+  @UI
   Scenario Outline: hobbies selection
     Given Hobbies didn't select
     When Student picks a <hobbie>
@@ -24,6 +26,7 @@ Feature: Student Registration Form
       | Reading |
       | Music   |
 
+    @UI
     Scenario Template: Gender selection. Need to check the group of radio buttons.
       Given Gender didn't selected
       When Student picks a gender <gender>
