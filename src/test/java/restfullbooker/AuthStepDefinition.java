@@ -25,7 +25,7 @@ public class AuthStepDefinition extends AbstractBaseStepDefinition{
 
     @When("do POST to {string}")
     public void sendPostRequest(String uri){
-        response = httpManager.sendPost(uri, requestBody);
+        response = httpManager.authorize(uri, requestBody);
     }
 
     @Then("status code is {int}")

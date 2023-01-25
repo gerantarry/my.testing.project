@@ -23,7 +23,11 @@ public class GetBookingIDsStepDefinition  extends AbstractBaseStepDefinition{
     @Then("response contains array of objects with booking ids")
     public void checkIdsArray(){
         Assertions.assertEquals(200, response.statusCode());
-        List<BookingId> idsArray = response.then().extract().jsonPath().getList("");
+        try {
+            List<BookingId> idsArray = response.then().extract().jsonPath().getList("");
+        }catch (NullPointerException e){
+            throw new AssertionError("Cannot find any objects in the response", e);
+        }
     }
 
 
