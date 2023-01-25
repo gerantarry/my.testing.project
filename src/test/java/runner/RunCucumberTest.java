@@ -7,6 +7,6 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = {"classpath:cucumber/features/"},
-        glue = {"demoqa/", "restfullbooker/"})
+        glue = {"demoqa", "restfullbooker"})
 public class RunCucumberTest {
 }
