@@ -30,8 +30,20 @@ public class BaseHttpManager extends AbstractHttpManager {
                 .build();
     }
 
+    /**
+     * for using custom content-type
+     * @param contentType for requests
+     */
     public void setContentType(String contentType){
         this.rqSpec.contentType(contentType);
+    }
+
+    /**
+     * for using base url
+     * @param url for requests
+     */
+    public void setBaseUrl(String url){
+        this.rqSpec.baseUri(url);
     }
 
     /**
