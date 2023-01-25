@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Assertions;
 
 import static org.hamcrest.Matchers.is;
 
-public class AuthStepDefinitions {
+public class AuthStepDefinition {
     private final HttpManager httpManager = new HttpManager();
     private Response response;
     private String requestBody;
@@ -53,7 +53,7 @@ public class AuthStepDefinitions {
 
     @When("do POST with invalid data to {string}")
     public void sendPostRequestWithInvalidData(String uri){
-       response = httpManager.sendPost(uri, requestBody);
+       response = httpManager.authorize(uri, requestBody);
     }
 
     @Then("response contains reason {string}")
