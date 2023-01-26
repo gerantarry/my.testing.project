@@ -1,12 +1,9 @@
 package http.manager;
 
 import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.builder.ResponseSpecBuilder;
-import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
 
 import java.util.Map;
 
@@ -14,8 +11,7 @@ import static io.restassured.RestAssured.given;
 
 public class BaseHttpManager extends AbstractHttpManager {
 
-    protected final RequestSpecification rqSpec;
-    protected final ResponseSpecification rsSpec;
+    protected  RequestSpecification rqSpec;
 
     public BaseHttpManager(){
         this("");
@@ -25,10 +21,6 @@ public class BaseHttpManager extends AbstractHttpManager {
         rqSpec = new RequestSpecBuilder()
                 .setBaseUri(baseUri)
                 .setContentType(ContentType.JSON)
-                .log(LogDetail.ALL)
-                .build();
-        rsSpec = new ResponseSpecBuilder()
-                .log(LogDetail.ALL)
                 .build();
     }
 
@@ -37,8 +29,13 @@ public class BaseHttpManager extends AbstractHttpManager {
      * @param contentType for requests
      */
     public void setContentType(String contentType){
-        this.rqSpec.contentType(contentType);
+        rqSpec = rqSpec.contentType(contentType);
     }
+
+    public void setHeaders(Map<String, String> map){
+        rqSpec.headers(map);
+    }
+
 
     /**
      * for using base url
@@ -56,13 +53,6 @@ public class BaseHttpManager extends AbstractHttpManager {
         rqSpec.spec(spec);
     }
 
-    /**
-     * some params will be overwritten
-     * @param spec for merging
-     */
-    public void mergeResponseSpec(ResponseSpecification spec){
-        rsSpec.spec(spec);
-    }
 
     /**
      * request with query
@@ -71,31 +61,31 @@ public class BaseHttpManager extends AbstractHttpManager {
      * @return Response from service
      */
     public Response sendGetWithQuery(String path, Map<String, String> queryParams){
-        return given(rqSpec.queryParams(queryParams), rsSpec)
+        return given(rqSpec.queryParams(queryParams))
                 .get(path);
     }
 
     @Override
     public Response sendGet(String path) {
-        return given(rqSpec, rsSpec)
-                .get(path);
+        return given().
+                when().get(path);
     }
 
     @Override
     public Response sendPost(String path, String body) {
-        return given(rqSpec.body(body), rsSpec)
+        return given(rqSpec.body(body))
                 .post(path);
     }
 
     @Override
     public Response sendPut(String path, String body) {
-        return given(rqSpec.body(body), rsSpec)
+        return given(rqSpec.body(body))
                 .put(path);
     }
 
     @Override
     public Response sendDelete(String path) {
-        return given(rqSpec, rsSpec)
+        return given(rqSpec)
                 .delete(path);
     }
 }

@@ -3,6 +3,9 @@ package http.manager;
 import io.restassured.RestAssured;
 import io.restassured.config.LogConfig;
 import io.restassured.config.RedirectConfig;
+import io.restassured.filter.log.ErrorLoggingFilter;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.Response;
 
 public abstract class AbstractHttpManager {
@@ -11,6 +14,7 @@ public abstract class AbstractHttpManager {
         RestAssured.config()
                 .redirect(new RedirectConfig().maxRedirects(10))
                 .logConfig(new LogConfig().enableLoggingOfRequestAndResponseIfValidationFails());
+        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter(), new ErrorLoggingFilter());
     }
 
     public abstract Response sendGet(String path);
