@@ -8,6 +8,8 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class BaseHttpManager extends AbstractHttpManager {
@@ -60,6 +62,17 @@ public class BaseHttpManager extends AbstractHttpManager {
      */
     public void mergeResponseSpec(ResponseSpecification spec){
         rsSpec.spec(spec);
+    }
+
+    /**
+     * request with query
+     * @param path to resource
+     * @param queryParams for filtering
+     * @return Response from service
+     */
+    public Response sendGetWithQuery(String path, Map<String, String> queryParams){
+        return given(rqSpec.queryParams(queryParams), rsSpec)
+                .get(path);
     }
 
     @Override
