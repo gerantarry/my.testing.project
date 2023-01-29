@@ -1,0 +1,11 @@
+{
+  "firstname" : "Larry",
+  "lastname" : "Sanders",
+  "totalprice" : 180,
+  "depositpaid" : true,
+  "bookingdates" : {
+    "checkin" : "2023-01-01",
+    "checkout" : "2023-01-17"
+  },
+  "additionalneeds" : "Breakfast"
+}
