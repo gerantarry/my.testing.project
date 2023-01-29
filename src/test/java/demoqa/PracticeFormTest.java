@@ -1,6 +1,6 @@
-package toolsQa;
+package demoqa;
 
-import dto.Student;
+import entity.Student;
 import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,7 +16,6 @@ import utils.FileUtils;
 
 import java.util.Properties;
 
-//TODO make more readable
 public class PracticeFormTest extends WebDriverSteps {
 
     private WebDriver driver;
@@ -36,9 +35,11 @@ public class PracticeFormTest extends WebDriverSteps {
         formPage = new PracticeFormPage(driver);
     }
 
-    @After
+    @After(value = "@UI")
     public void tearDown(){
-        driver.quit();
+        if (driver != null){
+            driver.quit();
+        }
     }
 
     @Given("Student is on the reg. form page")
