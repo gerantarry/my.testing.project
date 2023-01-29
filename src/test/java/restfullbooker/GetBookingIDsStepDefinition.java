@@ -42,7 +42,7 @@ public class GetBookingIDsStepDefinition extends AbstractBaseStepDefinition{
 
     @When("do GET with query firstname and lastname with path {string}")
     public void sendGetWithNameFilter(String path){
-        response = httpManager.sendGetWithQuery(path, queryMap);
+        response = httpManager.sendGet(path, queryMap);
     }
 
     @Then("response contains this person booking")
@@ -63,7 +63,7 @@ public class GetBookingIDsStepDefinition extends AbstractBaseStepDefinition{
 
     @When("do GET with date filters and path {string}")
     public void sendGetWithDatesFilter(String path){
-        response = httpManager.sendGetWithQuery(path, queryMap);
+        response = httpManager.sendGet(path, queryMap);
     }
 
     @Then("response contains these dates booking")

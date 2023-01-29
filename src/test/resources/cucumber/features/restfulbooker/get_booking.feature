@@ -16,4 +16,9 @@ Feature: Returns a specific booking based upon the booking id provided
       | 172  |
       | 1250 |
 
+    Scenario: Get booking in xml format
+      Given set Accept request header as "application/xml"
+      When do GET with id 172
+      Then response has xml format
+
 
